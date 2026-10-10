@@ -102,7 +102,7 @@ static const float kStandardPitchLoadOwnInertiaKgm2 = 0.0f;
 // Start conservatively because mass and center distance are only estimates.
 // Increase these scales from measured tracking/current data, not in one jump.
 static const float kStandardPitchLoadInertiaScale = 0.02f;
-static const float kStandardPitchGravityCompensationScale = 0.15f;
+static const float kStandardPitchGravityCompensationScale = 0.26f;
 // The load falls toward increasing encoder values, so holding current is
 // negative at the center angle. Center is assumed to be the horizontal pose.
 static const float kStandardPitchGravityCurrentSign = -1.0f;
@@ -404,7 +404,7 @@ static void StandardMotorInit(void) {
   const SmcEismcConfig gm6020_pitch_smc_config = {
       .sampling_time = 0.002f,
       .model_gain = pitch_model_gain,
-      .reaching_gain = 30.0f,
+      .reaching_gain = 60.0f,
       // A higher c1 reduces ramp-following error. c2 is kept well below c1,
       // but is non-zero so that friction/gravity cannot leave a static offset.
       .position_gain = 44.0f,
