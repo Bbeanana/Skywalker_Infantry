@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "构建 Debug（配置 CMake）",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--preset", "Debug"],
+            "problemMatcher": []
+        },
+        {
+            "label": "编译 Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "Debug"],
+            "dependsOn": "构建 Debug（配置 CMake）",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "构建 Release（配置 CMake）",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--preset", "Release"],
+            "problemMatcher": []
+        },
+        {
+            "label": "编译 Release",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "Release"],
+            "dependsOn": "构建 Release（配置 CMake）",
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "烧录 Debug 到开发板",
+            "type": "shell",
+            "command": "openocd",
+            "args": [
+                "-f", "interface/stlink.cfg",
+                "-f", "target/stm32h7x.cfg",
+                "-c", "reset_config none",
+                "-c", "program ${workspaceFolder}/build/Debug/standard_2026.elf verify reset exit"
+            ],
+            "dependsOn": "编译 Debug",
+            "problemMatcher": []
+        },
+        {
+            "label": "烧录 Release 到开发板",
+            "type": "shell",
+            "command": "openocd",
+            "args": [
+                "-f", "interface/stlink.cfg",
+                "-f", "target/stm32h7x.cfg",
+                "-c", "reset_config none",
+                "-c", "program ${workspaceFolder}/build/Release/standard_2026.elf verify reset exit"
+            ],
+            "dependsOn": "编译 Release",
+            "problemMatcher": []
+        }
+    ]
+}

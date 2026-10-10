@@ -1,0 +1,11 @@
+{
+    "cmake.cmakePath": "cmake",
+    "cmake.preferredGenerators": [
+        "Ninja"
+    ],
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "stm32cube-ide-clangd.path": "clangd",
+    "stm32cube-ide-clangd.arguments": [
+        "--query-driver=/usr/bin/arm-none-eabi-*"
+    ]
+}
